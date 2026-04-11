@@ -89,7 +89,7 @@ class="btn text-xs">agendar</a>
 <p class="mt-4 text-gray-300">protege la salud de tu bebé</p>
 
 <a href="https://wa.me/573172244861?text=Quiero%20agendar%20un%20servicio"
-class="btn mt-6 inline-block">agendar ahora</a>
+class="btn mt-6 inline-block">Agenda Tu Cita Ahora</a>
 </div>
 </section>
 
@@ -133,7 +133,7 @@ class="btn mt-6 inline-block">agendar ahora</a>
 <!-- FORM -->
 <section class="py-20 px-6 text-center">
 
-<h2 class="text-3xl mb-6">solicita asesoría</h2>
+<h2 class="text-3xl mb-6">Solicita Nuestra Asesoría</h2>
 
 <form onsubmit="sendToWhatsApp(event)" class="max-w-md mx-auto">
 
@@ -175,7 +175,7 @@ let name=document.getElementById('name').value;
 let phone=document.getElementById('phone').value;
 let msg=document.getElementById('msg').value;
 
-let text=`Hola soy ${name}, teléfono ${phone}. ${msg}`;
+let text=`Hola soy ${name}, Mi teléfono es ${phone}.y requiero ${msg}`;
 window.open(`https://wa.me/573172244861?text=${encodeURIComponent(text)}`);
 }
 
