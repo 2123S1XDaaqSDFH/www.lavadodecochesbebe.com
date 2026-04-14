@@ -1,417 +1,624 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tecnibaby - Especialistas en Detailing y desinfección de coches para bebés en Medellín. Eliminamos el 99.9% de bacterias.">
+    <meta name="keywords" content="lavado de coches, medellín, limpieza bebes, desinfección, detailing baby cars">
+    <link rel="icon" href="./Logo.png">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnibaby | Premium Detailing Baby Cars Medellín</title>
 
-<meta name="google-site-verification" content="AXQ5Zw2tSj57ulQTVCClux0X0dzFYfcqrjjyVcF5O5c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
-<title>Tecnibaby | Limpieza de coches para bebé en Medellín</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<meta name="description" content="Limpieza profesional de coches para bebé en Medellín. Eliminamos bacterias, ácaros y suciedad invisible. Servicio a domicilio premium.">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#38bdf8',
+                            DEFAULT: '#0ea5e9',
+                            dark: '#0369a1',
+                            accent: '#22c55e'
+                        },
+                        dark: {
+                            bg: '#050507',
+                            card: '#0f1115',
+                            border: 'rgba(255,255,255,0.08)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===================== CUSTOM STYLES ===================== */
+        :root {
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        body {
+            background-color: #050507;
+            color: #f8fafc;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-<style>
+        /* Ocultar scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
 
-:root{
---brand:#0ea5e9;
---dark:#0b0b0f;
---green:#22c55e;
---white:#ffffff;
-}
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-body{
-margin:0;
-font-family:Poppins,sans-serif;
-background:var(--dark);
-color:white;
-}
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(14, 165, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
 
-/* ================= BUTTON SYSTEM (tipo premium UI) ================= */
+        .text-gradient {
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.btn{
-padding:12px 18px;
-border-radius:12px;
-font-weight:600;
-text-decoration:none;
-transition:.3s;
-display:inline-block;
-border:1px solid transparent;
-}
+        .btn-hover-effect {
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+        }
 
-.btn-primary{
-background:linear-gradient(45deg,#0ea5e9,#2563eb);
-color:white;
-}
+        .btn-hover-effect::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
 
-.btn-primary:hover{
-transform:scale(1.05);
-filter:brightness(1.1);
-}
+        .btn-hover-effect:hover::after {
+            left: 100%;
+        }
 
-.btn-green{
-background:linear-gradient(45deg,#22c55e,#16a34a);
-color:white;
-}
+        /* Animación del Loader mejorada */
+        #loader {
+            background: #000;
+            z-index: 10000;
+        }
 
-.btn-outline{
-border:1px solid white;
-background:transparent;
-}
+        .loader-bar {
+            width: 0%;
+            height: 2px;
+            background: #0ea5e9;
+            box-shadow: 0 0 15px #0ea5e9;
+        }
 
-.btn-outline:hover{
-background:white;
-color:black;
-}
+        /* Parallax y Hero */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            font-weight: 800;
+        }
 
-/* ================= LOADER ================= */
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+        }
 
-#loader{
-position:fixed;
-inset:0;
-background:black;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-z-index:9999;
-}
+        /* Timeline de proceso */
+        .step-number {
+            font-family: 'Space Grotesk';
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            color: transparent;
+            font-size: 4rem;
+        }
 
-#loader img{
-width:150px;
-animation:pulse 1.5s infinite;
-}
+        /* Sección Antes/Después Comparador */
+        .comparison-slider {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
 
-@keyframes pulse{
-0%{transform:scale(.9);opacity:.4;}
-50%{transform:scale(1);opacity:1;}
-100%{transform:scale(.9);opacity:.4;}
-}
+        /* Precios */
+        .price-card.featured {
+            border: 2px solid #0ea5e9;
+            transform: scale(1.05);
+            z-index: 10;
+        }
 
-/* ================= NAV ================= */
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 20px;
-background:rgba(0,0,0,.6);
-backdrop-filter:blur(12px);
-z-index:1000;
-}
-
-/* ================= HERO ================= */
-
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
-background:radial-gradient(circle at center, rgba(255,255,255,.08), transparent 60%);
-pointer-events:none;
-}
-
-.hero > div{
-position:relative;
-z-index:2;
-}
-
-h1{font-size:3rem;line-height:1.1;}
-@media(max-width:768px){h1{font-size:2rem;}}
-
-/* ================= CARDS ================= */
-
-.card{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.1);
-padding:18px;
-border-radius:14px;
-backdrop-filter:blur(10px);
-}
-
-/* ================= GRID ================= */
-
-.grid{
-display:grid;
-gap:15px;
-}
-
-.grid-3{grid-template-columns:repeat(3,1fr);}
-.grid-2{grid-template-columns:repeat(2,1fr);}
-
-@media(max-width:768px){
-.grid-3,.grid-2{grid-template-columns:1fr;}
-}
-
-/* ================= WHATSAPP ================= */
-
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-width:60px;
-height:60px;
-background:#25D366;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-text-decoration:none;
-}
-
-/* ================= TIMER ================= */
-
-#timerBox{
-position:fixed;
-top:90px;
-right:20px;
-background:var(--brand);
-padding:10px 14px;
-border-radius:12px;
-}
-
-/* ================= NOTIF ================= */
-
-#notif{
-position:fixed;
-bottom:20px;
-left:20px;
-background:#111;
-padding:10px;
-border-radius:10px;
-opacity:0;
-transition:.5s;
-}
-
-/* ================= CHAT ================= */
-
-#chat{
-position:fixed;
-bottom:90px;
-right:20px;
-width:260px;
-background:#111;
-border-radius:12px;
-display:none;
-flex-direction:column;
-}
-
-#chatMessages{
-height:180px;
-overflow:auto;
-padding:10px;
-font-size:13px;
-}
-
-.chat-btn{
-background:var(--brand);
-padding:8px;
-text-align:center;
-cursor:pointer;
-}
-
-/* ================= SECTIONS ================= */
-
-section{
-padding:80px 20px;
-max-width:1100px;
-margin:auto;
-}
-
-/* ================= EXTRA UI (inspirado estilo premium) ================= */
-
-.glass{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,.1);
-border-radius:16px;
-padding:20px;
-}
-
-.small{
-font-size:13px;
-color:#ccc;
-}
-
-</style>
-
+        /* Estilos para Mobile */
+        @media (max-width: 640px) {
+            .hero-title { font-size: 2.8rem; }
+            section { padding-top: 60px; padding-bottom: 60px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-<img src="./Logo.png">
-<p>limpiezadecochesdebebe.com</p>
-</div>
+    <div id="loader" class="fixed inset-0 flex flex-col items-center justify-center">
+        <div class="relative mb-6">
+            <img src="./Logo.png" class="w-32 md:w-40 relative z-10" id="loaderLogo">
+            <div class="absolute inset-0 bg-blue-500 blur-3xl opacity-20 animate-pulse"></div>
+        </div>
+        <div class="w-48 h-1 bg-gray-900 rounded-full overflow-hidden">
+            <div class="loader-bar h-full" id="loaderBar"></div>
+        </div>
+        <p class="mt-4 text-xs tracking-[0.3em] uppercase text-gray-500 font-medium">Cargando Experiencia</p>
+    </div>
 
-<!-- NAV -->
-<nav>
+    <nav class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 px-6 py-4" id="mainNav">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="w-10 h-10 bg-brand p-1 rounded-xl group-hover:rotate-12 transition-transform">
+                    <img src="./Logo.png" alt="Tecnibaby Logo" class="w-full h-full object-contain">
+                </div>
+                <span class="text-xl font-bold tracking-tight font-heading">TECNI<span class="text-brand">BABY</span></span>
+            </div>
 
-<div style="display:flex;align-items:center;gap:10px;">
-<img src="./Logo.png" style="height:40px;">
-<strong>Tecnibaby</strong>
-</div>
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#inicio" class="text-sm font-medium hover:text-brand transition-colors">Inicio</a>
+                <a href="#servicios" class="text-sm font-medium hover:text-brand transition-colors">Servicios</a>
+                <a href="#proceso" class="text-sm font-medium hover:text-brand transition-colors">Proceso</a>
+                <a href="#precios" class="text-sm font-medium hover:text-brand transition-colors">Precios</a>
+                <a href="#contacto" class="btn-hover-effect bg-brand px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-blue-500/20">Agendar Cita</a>
+            </div>
 
-<a class="btn btn-primary" href="https://wa.me/573203480677">
-Agendar
-</a>
+            <button class="md:hidden text-2xl" id="menuBtn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
 
-</nav>
+    <section id="inicio" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <div class="blob top-[-10%] right-[-10%] animate-pulse"></div>
+        <div class="blob bottom-[-10%] left-[-10%]"></div>
+        
+        <div class="hero-bg absolute inset-0 z-[-2]">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-dark-bg/80 to-dark-bg"></div>
+            <div class="w-full h-full bg-[url('./coches.jpg')] bg-cover bg-center opacity-40 scale-105" id="heroImage"></div>
+        </div>
 
-<!-- HERO -->
-<section class="hero">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="hero-text-container">
+                <span class="inline-block px-4 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-bold uppercase tracking-widest mb-6">
+                    ✨ Premium Baby Car Detailing
+                </span>
+                <h1 class="hero-title font-heading mb-6">
+                    Higiene <span class="text-brand">Superior</span> Para Tu Bebé.
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl max-w-lg mb-10">
+                    No es solo limpieza, es desinfección de grado hospitalario. Eliminamos ácaros, bacterias y manchas difíciles con tecnología de vapor seco.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#servicios" class="btn-hover-effect bg-brand px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 text-white">
+                        Explorar Servicios <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="https://wa.me/573203480677" class="btn-hover-effect bg-white/5 border border-white/10 hover:bg-white/10 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i> Hablar con un experto
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex items-center gap-6">
+                    <div class="flex -space-x-4">
+                        <div class="w-12 h-12 rounded-full border-2 border-dark-bg bg-gray-800 flex items-center justify-center">👶</div>
+                        <div class="w-12 h-12 rounded-full border-2 border-dark-bg bg-gray-800 flex items-center justify-center">✨</div>
+                        <div class="w-12 h-12 rounded-full border-2 border-dark-bg bg-gray-800 flex items-center justify-center">🛡️</div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold">500+ Padres Felices</p>
+                        <p class="text-xs text-gray-500">Servicio #1 en Medellín</p>
+                    </div>
+                </div>
+            </div>
 
-<div style="max-width:600px;">
+            <div class="relative hidden md:block" id="heroVisual">
+                <div class="relative z-10 glass-card p-4 rounded-[2rem] overflow-hidden rotate-3">
+                    <img src="./coches.jpg" alt="Detailing" class="rounded-[1.5rem] w-full shadow-2xl">
+                </div>
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand/20 blur-2xl rounded-full"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-600/20 blur-3xl rounded-full"></div>
+            </div>
+        </div>
+    </section>
 
-<h1>Limpieza y desinfección de coches para bebé en Medellín</h1>
+    <section class="py-20 border-y border-white/5 bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <h3 class="text-4xl font-bold font-heading text-brand mb-1 counter" data-target="99">0</h3>
+                <p class="text-gray-500 text-sm uppercase tracking-tighter">% Bacterias Eliminadas</p>
+            </div>
+            <div class="text-center">
+                <h3 class="text-4xl font-bold font-heading text-brand mb-1 counter" data-target="2500">0</h3>
+                <p class="text-gray-500 text-sm uppercase tracking-tighter">Coches Renovados</p>
+            </div>
+            <div class="text-center">
+                <h3 class="text-4xl font-bold font-heading text-brand mb-1 counter" data-target="100">0</h3>
+                <p class="text-gray-500 text-sm uppercase tracking-tighter">% Clientes Satisfechos</p>
+            </div>
+            <div class="text-center">
+                <h3 class="text-4xl font-bold font-heading text-brand mb-1 counter" data-target="3">0</h3>
+                <p class="text-gray-500 text-sm uppercase tracking-tighter">Años de Garantía</p>
+            </div>
+        </div>
+    </section>
 
-<p class="small">
-Protege la salud de tu bebé eliminando bacterias invisibles con limpieza profesional.
-</p>
+    <section id="servicios" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6">Nuestras soluciones <br><span class="text-brand">de cuidado integral</span></h2>
+                    <p class="text-gray-400">Utilizamos productos biodegradables y tecnología de punta para asegurar que el primer entorno de tu bebé esté siempre impecable.</p>
+                </div>
+                <a href="#contacto" class="text-brand font-bold flex items-center gap-2 hover:gap-4 transition-all uppercase text-sm tracking-widest">Ver catálogo completo <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
 
-<a class="btn btn-green" href="https://wa.me/573203480677">
-Agendar por WhatsApp
-</a>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 group">
+                    <div class="w-14 h-14 bg-brand/10 rounded-2xl flex items-center justify-center text-brand text-2xl mb-8 group-hover:bg-brand group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-hand-sparkles"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Lavado Interior</h3>
+                    <p class="text-gray-400 mb-6">Extracción profunda de residuos orgánicos, leche, jugos y suciedad acumulada en las fibras.</p>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Desinfección de arnés</li>
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Lavado de textiles</li>
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Hidratación de plásticos</li>
+                    </ul>
+                </div>
 
-</div>
+                <div class="glass-card p-8 group">
+                    <div class="w-14 h-14 bg-brand/10 rounded-2xl flex items-center justify-center text-brand text-2xl mb-8 group-hover:bg-brand group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-virus-slash"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Tratamiento Germicida</h3>
+                    <p class="text-gray-400 mb-6">Aplicación de vapor a 180°C que garantiza la muerte de ácaros, virus y bacterias sin químicos agresivos.</p>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Vapor de alta presión</li>
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Sin residuos tóxicos</li>
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Ideal para recién nacidos</li>
+                    </ul>
+                </div>
 
-</section>
+                <div class="glass-card p-8 group">
+                    <div class="w-14 h-14 bg-brand/10 rounded-2xl flex items-center justify-center text-brand text-2xl mb-8 group-hover:bg-brand group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Recogida Domicilio</h3>
+                    <p class="text-gray-400 mb-6">No te preocupes por el transporte. Recogemos tu coche y lo entregamos como nuevo en 24-48h.</p>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Cobertura en todo Medellín</li>
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Embalaje protector</li>
+                        <li><i class="fa-solid fa-check text-brand mr-2"></i> Rastreo de pedido</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- INTRO -->
-<section>
+    <section id="proceso" class="py-24 bg-dark-card/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <h2 class="text-4xl font-bold font-heading mb-6">¿Cómo lo hacemos?</h2>
+                <p class="text-gray-400">Un proceso meticuloso diseñado para la seguridad de lo que más quieres.</p>
+            </div>
 
-<div class="glass">
+            <div class="relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-brand/20 -translate-y-1/2"></div>
 
-<h2>Servicio profesional en Medellín</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div class="relative z-10 bg-dark-bg p-6 text-center rounded-3xl border border-white/5">
+                        <span class="step-number">01</span>
+                        <h4 class="text-xl font-bold mb-2">Diagnóstico</h4>
+                        <p class="text-sm text-gray-500">Evaluamos el estado del material y tipo de manchas.</p>
+                    </div>
+                    <div class="relative z-10 bg-dark-bg p-6 text-center rounded-3xl border border-white/5">
+                        <span class="step-number text-brand">02</span>
+                        <h4 class="text-xl font-bold mb-2">Desmontaje</h4>
+                        <p class="text-sm text-gray-500">Separamos cada pieza textil para un lavado profundo.</p>
+                    </div>
+                    <div class="relative z-10 bg-dark-bg p-6 text-center rounded-3xl border border-white/5">
+                        <span class="step-number">03</span>
+                        <h4 class="text-xl font-bold mb-2">Tratamiento</h4>
+                        <p class="text-sm text-gray-500">Lavado, vaporización y eliminación de olores.</p>
+                    </div>
+                    <div class="relative z-10 bg-dark-bg p-6 text-center rounded-3xl border border-white/5">
+                        <span class="step-number">04</span>
+                        <h4 class="text-xl font-bold mb-2">Control</h4>
+                        <p class="text-sm text-gray-500">Inspección de calidad final y entrega sellada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p>
-Realizamos limpieza profunda, desinfección y eliminación de bacterias en coches y sillas para bebé.
-</p>
+    <section id="precios" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-4xl font-bold font-heading mb-16">Planes de Mantenimiento</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div class="glass-card p-10 rounded-[2.5rem]">
+                    <h3 class="text-xl font-bold mb-2">Básico</h3>
+                    <div class="text-4xl font-bold mb-6">$85.000 <span class="text-sm font-normal text-gray-500">/ sesión</span></div>
+                    <ul class="space-y-4 mb-10 text-gray-400">
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Aspirado profundo</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Lavado de estructura</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Desinfección básica</li>
+                        <li class="opacity-30"><i class="fa-solid fa-circle-xmark mr-2"></i> Recogida domicilio</li>
+                    </ul>
+                    <a href="#" class="block w-full text-center py-4 border border-white/10 rounded-2xl font-bold hover:bg-white/5 transition-colors">Elegir Plan</a>
+                </div>
 
-</div>
+                <div class="price-card featured glass-card p-12 rounded-[2.5rem] bg-gradient-to-b from-brand/10 to-transparent relative overflow-hidden">
+                    <div class="absolute top-5 right-5 bg-brand text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Popular</div>
+                    <h3 class="text-2xl font-bold mb-2">Full Detailing</h3>
+                    <div class="text-5xl font-bold mb-6 text-brand">$145.000 <span class="text-sm font-normal text-gray-500">/ sesión</span></div>
+                    <ul class="space-y-4 mb-10 text-gray-300">
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Desmontaje completo</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Lavado a vapor seco</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Eliminación de manchas</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Recogida y entrega</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Hidratación de ruedas</li>
+                    </ul>
+                    <a href="#" class="btn-hover-effect block w-full text-center py-4 bg-brand rounded-2xl font-bold shadow-xl shadow-brand/20">Agendar Ahora</a>
+                </div>
 
-</section>
+                <div class="glass-card p-10 rounded-[2.5rem]">
+                    <h3 class="text-xl font-bold mb-2">Tecni-Elite</h3>
+                    <div class="text-4xl font-bold mb-6">$195.000 <span class="text-sm font-normal text-gray-500">/ sesión</span></div>
+                    <ul class="space-y-4 mb-10 text-gray-400">
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Todo lo del plan Full</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Tratamiento cerámico</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Kit de limpieza express</li>
+                        <li><i class="fa-solid fa-circle-check text-brand mr-2"></i> Entrega prioridad (24h)</li>
+                    </ul>
+                    <a href="#" class="block w-full text-center py-4 border border-white/10 rounded-2xl font-bold hover:bg-white/5 transition-colors">Elegir Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- SERVICIOS -->
-<section>
+    <section class="py-24 bg-dark-bg relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold font-heading mb-8">Resultados que <br><span class="text-brand">puedes ver.</span></h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="text-brand text-xl"><i class="fa-solid fa-microscope"></i></div>
+                            <div>
+                                <h5 class="font-bold">Análisis UV</h5>
+                                <p class="text-sm text-gray-500">Detectamos suciedad que el ojo humano no ve bajo luces especiales.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-brand text-xl"><i class="fa-solid fa-wind"></i></div>
+                            <div>
+                                <h5 class="font-bold">Neutralización de Olores</h5>
+                                <p class="text-sm text-gray-500">Oxi-desinfección para eliminar olores de humedad y comida.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+                    <img src="./coches.jpg" class="w-full grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Antes y Después">
+                    <div class="p-6 bg-dark-card border-t border-white/10">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs uppercase font-bold text-gray-500">Estado: Recuperación total</span>
+                            <span class="text-brand font-bold">100% Limpio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Servicios</h2>
+    <footer id="contacto" class="pt-24 pb-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-8">
+                        <img src="./Logo.png" class="h-12">
+                        <span class="text-2xl font-bold font-heading italic">TECNIBABY</span>
+                    </div>
+                    <p class="text-gray-500 max-w-sm mb-8 leading-relaxed">
+                        Liderando la industria del detailing infantil en Medellín. Nos apasiona la seguridad y la salud de tu familia a través de la higiene impecable.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
 
-<div class="grid grid-3">
+                <div>
+                    <h4 class="font-bold mb-8 uppercase text-xs tracking-widest">Navegación</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-brand transition-colors">Sobre Nosotros</a></li>
+                        <li><a href="#" class="hover:text-brand transition-colors">Nuestros Procesos</a></li>
+                        <li><a href="#" class="hover:text-brand transition-colors">Blog de Salud</a></li>
+                        <li><a href="#" class="hover:text-brand transition-colors">Términos de Servicio</a></li>
+                    </ul>
+                </div>
 
-<div class="card">Desinfección profunda</div>
-<div class="card">Eliminación de bacterias</div>
-<div class="card">Lavado premium</div>
-<div class="card">Secado profesional</div>
-<div class="card">Recogida a domicilio</div>
-<div class="card">Entrega programada</div>
+                <div>
+                    <h4 class="font-bold mb-8 uppercase text-xs tracking-widest">Contacto</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-brand"></i> Medellín, Antioquia</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-brand"></i> +57 320 348 0677</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-brand"></i> info@tecnibaby.com</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-clock text-brand"></i> Lun - Sáb: 8am - 6pm</li>
+                    </ul>
+                </div>
+            </div>
 
-</div>
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-gray-600 text-xs gap-4">
+                <p>&copy; 2026 Tecnibaby Medellín. Todos los derechos reservados.</p>
+                <p>Diseño por <span class="text-white font-medium">Digital Craft Studio</span></p>
+            </div>
+        </div>
+    </footer>
 
-</section>
+    <a href="https://wa.me/573203480677" class="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl shadow-2xl z-[500] hover:scale-110 active:scale-95 transition-all">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="absolute -top-1 -right-1 flex h-5 w-5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-5 w-5 bg-brand"></span>
+        </span>
+    </a>
 
-<!-- PROCESO -->
-<section>
+    <script>
+        // 1. LOADER LOGIC
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            
+            tl.to("#loaderBar", {
+                width: "100%",
+                duration: 1.5,
+                ease: "power2.inOut"
+            })
+            .to("#loaderLogo", {
+                scale: 0.8,
+                opacity: 0,
+                duration: 0.5
+            })
+            .to("#loader", {
+                yPercent: -100,
+                duration: 0.8,
+                ease: "power4.inOut"
+            }, "-=0.2");
 
-<h2>Proceso</h2>
+            // Init Hero Animations
+            tl.from(".hero-title", { opacity: 0, y: 100, duration: 1, stagger: 0.2 }, "-=0.3")
+              .from(".hero-text-container p", { opacity: 0, y: 30, duration: 0.8 }, "-=0.5")
+              .from(".hero-text-container .flex", { opacity: 0, x: -50, duration: 0.8 }, "-=0.5")
+              .from("#heroVisual", { opacity: 0, scale: 0.8, duration: 1.2, ease: "elastic.out(1, 0.5)" }, "-=1");
+        });
 
-<div class="grid grid-3">
+        // 2. STICKY NAV & SCROLL EFFECTS
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-dark-bg/80', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.remove('bg-dark-bg/80', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'py-2');
+                nav.classList.add('py-4');
+            }
+        });
 
-<div class="card">1. Inspección</div>
-<div class="card">2. Desarme técnico</div>
-<div class="card">3. Limpieza profunda</div>
-<div class="card">4. Desinfección</div>
-<div class="card">5. Secado</div>
-<div class="card">6. Revisión final</div>
+        // 3. COUNTERS ANIMATION
+        const counters = document.querySelectorAll('.counter');
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
 
-</div>
+                    const update = () => {
+                        current += step;
+                        if (current < target) {
+                            entry.target.innerText = Math.floor(current);
+                            requestAnimationFrame(update);
+                        } else {
+                            entry.target.innerText = target + (target === 99 ? '%' : '+');
+                        }
+                    };
+                    update();
+                    countObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
 
-</section>
+        counters.forEach(c => countObserver.observe(c));
 
-<!-- PEDIDO -->
-<section>
+        // 4. GSAP SCROLL TRIGGERS PARA CARTAS
+        gsap.registerPlugin(ScrollTrigger);
 
-<h2>Consultar pedido</h2>
+        gsap.utils.toArray('.glass-card').forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 60,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
 
-<input id="buscar" placeholder="ID pedido"
-style="padding:12px;border-radius:10px;background:black;color:white;border:1px solid #333;">
+        // 5. PARALLAX EFFECT EN HERO IMAGE
+        gsap.to("#heroImage", {
+            scrollTrigger: {
+                trigger: "#inicio",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            },
+            y: 100,
+            scale: 1.2
+        });
 
-<button class="btn btn-primary" onclick="buscarPedido()">Buscar</button>
+        // 6. MENU MOBILE (Sencillo)
+        const menuBtn = document.getElementById('menuBtn');
+        menuBtn.addEventListener('click', () => {
+            // Aquí se podría implementar un sidebar completo
+            alert("Tecnibaby Menu: Servicios, Precios, Proceso, Contacto");
+        });
 
-<div id="resultado"></div>
+        // 7. SMOOTH SCROLL PARA TODOS LOS LINKS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === "#") return;
+                
+                gsap.to(window, {
+                    duration: 1,
+                    scrollTo: targetId,
+                    ease: "power3.inOut"
+                });
+            });
+        });
 
-</section>
+    </script>
 
-<!-- WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/573203480677">💬</a>
+    </body>
 
-<!-- TIMER -->
-<div id="timerBox">⏳ <span id="timer">05:00</span></div>
-
-<!-- NOTIF -->
-<div id="notif"></div>
-
-<!-- CHAT -->
-<div id="chat">
-<div id="chatMessages"></div>
-<input id="chatInput" style="padding:10px;">
-<div class="chat-btn" onclick="sendChat()">Enviar</div>
-</div>
-
-<div class="chat-btn" onclick="toggleChat()" style="position:fixed;bottom:20px;right:100px;">🤖</div>
-
-<script>
-
-setTimeout(()=>document.getElementById("loader").style.display="none",1800);
-
-const names=["Juan","Laura","Pedro","Camila"];
-
-setInterval(()=>{
-let n=names[Math.floor(Math.random()*names.length)];
-let el=document.getElementById("notif");
-el.innerText=n+" agendó servicio";
-el.style.opacity=1;
-setTimeout(()=>el.style.opacity=0,3000);
-},6000);
-
-let t=300;
-setInterval(()=>{
-t--;
-let m=Math.floor(t/60);
-let s=t%60;
-document.getElementById("timer").innerText=`${m}:${s<10?'0':''}${s}`;
-},1000);
-
-function buscarPedido(){
-document.getElementById("resultado").innerHTML=
-`<div class="glass">Estado: En proceso - 65%</div>`;
-}
-
-function toggleChat(){
-let c=document.getElementById("chat");
-c.style.display=c.style.display=="flex"?"none":"flex";
-}
-
-function sendChat(){
-let i=document.getElementById("chatInput");
-let m=i.value;
-document.getElementById("chatMessages").innerHTML+=`<p>👤 ${m}</p>`;
-i.value="";
-}
-
-gsap.from("h1",{opacity:0,y:40,duration:1});
-
-</script>
-
-</body>
 </html>
