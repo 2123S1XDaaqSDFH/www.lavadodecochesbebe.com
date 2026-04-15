@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tecnibaby | Limpieza Profesional</title>
+<!-- SEO -->
+<title>Limpieza de coches de bebé en Medellín | tecnibaby</title>
+
+<meta name="description" content="Limpieza y desinfección de coches y sillas de bebé en Medellín. Eliminamos bacterias, ácaros y olores con vapor y tecnología UV-C. Agenda por WhatsApp.">
+
+<meta name="keywords" content="limpieza coche bebe medellin, limpiar silla bebe medellin, desinfeccion coche bebe, tecnibaby medellin">
+
+<meta name="geo.region" content="CO-ANT">
+<meta name="geo.placename" content="Medellín">
+<meta name="geo.position" content="6.2442;-75.5812">
+
+<!-- GOOGLE STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "LocalBusiness",
+"name": "tecnibaby",
+"telephone": "+573203480677",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "Medellín",
+"addressRegion": "Antioquia",
+"addressCountry": "CO"
+}
+}
+</script>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -19,19 +44,6 @@ background:#000;
 color:#fff;
 font-family:'Poppins',sans-serif;
 overflow:hidden;
-}
-
-/* SCROLL CINEMATICO */
-.section{
-min-height:100vh;
-display:flex;
-align-items:center;
-}
-
-/* REVEAL */
-.reveal{
-opacity:0;
-transform:translateY(80px);
 }
 
 /* LOADER */
@@ -72,23 +84,50 @@ border-bottom:1px solid rgba(255,255,255,.05);
 /* BOTON */
 .btn{
 background:var(--brand);
-padding:12px 25px;
-border-radius:10px;
-font-size:11px;
+padding:14px 28px;
+border-radius:12px;
+font-size:12px;
 font-weight:900;
 letter-spacing:2px;
 transition:.3s;
 }
 
 .btn:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 25px rgba(219,39,119,.4);
+transform:translateY(-5px);
+box-shadow:0 15px 35px rgba(219,39,119,.5);
 }
 
-/* CARD */
+/* SCROLL */
+.section{
+min-height:100vh;
+display:flex;
+align-items:center;
+}
+
+.reveal{
+opacity:0;
+transform:translateY(80px);
+}
+
+/* LIMPIEZA EFECTO */
+.clean-box{
+position:relative;
+overflow:hidden;
+border-radius:20px;
+}
+
+.clean-overlay{
+position:absolute;
+inset:0;
+background:#000;
+}
+
+/* CARDS */
 .card{
 background:#0a0a0a;
 border:1px solid rgba(255,255,255,.05);
+padding:20px;
+border-radius:15px;
 transition:.4s;
 }
 
@@ -135,12 +174,9 @@ box-shadow:0 10px 30px rgba(37,211,102,.5);
 
 <!-- HEADER -->
 <header class="glass-header fixed top-0 w-full py-4 px-6 z-50">
-<div class="flex justify-between items-center max-w-7xl mx-auto">
-
+<div class="flex justify-between max-w-7xl mx-auto">
 <h1 class="font-black text-xl">tecni<span class="text-pink-600">baby</span></h1>
-
 <a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20un%20servicio" class="btn">Agenda Ahora</a>
-
 </div>
 </header>
 
@@ -150,61 +186,61 @@ box-shadow:0 10px 30px rgba(37,211,102,.5);
 
 <div class="reveal">
 <h2 class="text-5xl md:text-7xl font-black uppercase">
-EL ARTE DE LA <span class="text-pink-600">PUREZA</span>
+Limpieza <span class="text-pink-600">Profesional</span>
 </h2>
 
 <p class="text-gray-400 mt-6 max-w-md">
-En tecnibaby no solo limpiamos, restauramos la seguridad biológica del entorno de tu bebé.
+En tecnibaby no solo limpiamos, eliminamos bacterias, ácaros y olores que pueden afectar la salud de tu bebé
 </p>
 
-<!-- CONTADOR -->
 <div class="mt-6 bg-pink-600/10 border border-pink-600/30 p-4 rounded-lg">
-<p class="text-sm">⏳ Promoción termina en:</p>
-<p id="countdown" class="text-2xl font-black text-pink-500"></p>
+<p>⏳ Promoción termina en:</p>
+<p id="countdown" class="text-2xl text-pink-500 font-black"></p>
 </div>
 
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20mi%20servicio" class="btn mt-6 inline-block">Agendar Ahora</a>
+<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20mi%20servicio" class="btn mt-6 inline-block">
+Agendar Ahora
+</a>
 </div>
 
-<div class="reveal">
-<iframe src="https://www.youtube.com/embed/Fr3Sr3Uc17I"
-class="w-full h-[350px] rounded-xl"></iframe>
+<div class="clean-box reveal">
+<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348" class="rounded-xl">
+<div class="clean-overlay" id="cleanEffect"></div>
 </div>
 
 </div>
 </section>
 
 <!-- PROCESO -->
-<section class="py-28 px-6">
+<section class="py-20 px-6">
 <div class="max-w-7xl mx-auto">
+<h3 class="text-4xl font-black mb-12 text-center">Nuestro proceso en 4 etapas</h3>
 
-<h3 class="text-4xl font-black mb-16 text-center">Proceso Profesional</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-<div class="card p-6 rounded-xl reveal">
-<h4 class="text-pink-600 font-bold mb-2">01. Diagnóstico técnico</h4>
+<div class="card reveal">
+<h4 class="text-pink-600 font-bold">01. Diagnóstico técnico</h4>
 <p class="text-gray-400 text-sm">
 Inspeccionamos el estado del coche y registramos cada detalle para un proceso seguro y controlado.
 </p>
 </div>
 
-<div class="card p-6 rounded-xl reveal border-b-2 border-pink-600">
-<h4 class="text-pink-600 font-bold mb-2">🧽 02. Limpieza profunda</h4>
+<div class="card reveal">
+<h4 class="text-pink-600 font-bold">🧽 02. Limpieza profunda</h4>
 <p class="text-gray-300 text-sm">
 Limpieza profunda de telas y estructura, mantenimiento de llantas
 </p>
 </div>
 
-<div class="card p-6 rounded-xl reveal">
-<h4 class="text-pink-600 font-bold mb-2">💨 03. Higienización a vapor</h4>
+<div class="card reveal">
+<h4 class="text-pink-600 font-bold">💨 03. Higienización a vapor</h4>
 <p class="text-gray-400 text-sm">
 Aplicamos vapor a alta temperatura que elimina bacterias, ácaros y olores sin químicos agresivos.
 </p>
 </div>
 
-<div class="card p-6 rounded-xl reveal">
-<h4 class="text-pink-600 font-bold mb-2">✨ 04. Desinfección UV-C</h4>
+<div class="card reveal">
+<h4 class="text-pink-600 font-bold">✨ 04. Desinfección UV-C</h4>
 <p class="text-gray-400 text-sm">
 Tecnología avanzada que elimina microorganismos invisibles, brindando máxima protección.
 </p>
@@ -217,68 +253,88 @@ Tecnología avanzada que elimina microorganismos invisibles, brindando máxima p
 <!-- TESTIMONIOS -->
 <section class="py-20 px-6">
 <div class="max-w-7xl mx-auto">
-
 <h3 class="text-4xl font-black mb-12 text-center">Opiniones reales</h3>
 
 <div class="grid md:grid-cols-3 gap-6">
 
 <div class="testimonial reveal">
 <p>"Increíble servicio, quedó como nuevo 🔥"</p>
-<span class="text-pink-500 text-sm">⭐️⭐️⭐️⭐️⭐️ - Laura M</span>
+<span class="text-pink-500">⭐️⭐️⭐️⭐️⭐️ - Laura M</span>
 </div>
 
 <div class="testimonial reveal">
 <p>"Se nota la diferencia, súper recomendado"</p>
-<span class="text-pink-500 text-sm">⭐️⭐️⭐️⭐️⭐️ - Andrés R</span>
+<span class="text-pink-500">⭐️⭐️⭐️⭐️⭐️ - Andrés R</span>
 </div>
 
 <div class="testimonial reveal">
 <p>"Mi bebé ahora está mucho más seguro"</p>
-<span class="text-pink-500 text-sm">⭐️⭐️⭐️⭐️⭐️ - Camila P</span>
+<span class="text-pink-500">⭐️⭐️⭐️⭐️⭐️ - Camila P</span>
 </div>
 
 </div>
 </div>
 </section>
 
+<!-- SEO TEXTO -->
+<section class="py-20 px-6">
+<div class="max-w-4xl mx-auto text-gray-400 text-sm">
+
+<h2 class="text-2xl text-white font-black mb-6">
+Limpieza de coches y sillas de bebé en Medellín
+</h2>
+
+<p>
+En tecnibaby ofrecemos servicio especializado de limpieza de coches de bebé en Medellín, eliminando bacterias, ácaros y olores con tecnología avanzada como vapor y desinfección UV-C.
+</p>
+
+</div>
+</section>
+
 <!-- WHATSAPP -->
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20informaci%C3%B3n" class="whatsapp">
+<a href="https://wa.me/573203480677?text=Hola%20quiero%20información" class="whatsapp">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
 <script>
 
-// LOADER
 window.addEventListener("load",()=>{
 const tl=gsap.timeline();
 
-tl.to("#logo",{opacity:1,scale:1,duration:1})
-.to("#scan",{opacity:1,duration:.3},"-=.5")
-.to("#scan",{top:"100%",duration:1.5})
-.to("#main-loader",{y:"-100%",duration:.8})
+tl.to("#logo",{opacity:1,scale:1})
+.to("#scan",{opacity:1},"-=.5")
+.to("#scan",{top:"100%"})
+.to("#main-loader",{y:"-100%"})
 .to("body",{overflow:"auto"});
 
-// REVEAL
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.utils.toArray(".reveal").forEach((el,i)=>{
+gsap.utils.toArray(".reveal").forEach(el=>{
 gsap.to(el,{
 scrollTrigger:{trigger:el,start:"top 85%"},
 opacity:1,
-y:0,
-duration:1,
-delay:i*0.1
-});
+y:0
 });
 });
 
-// CONTADOR
-let time = 7200;
+gsap.to("#cleanEffect",{
+scrollTrigger:{
+trigger:"#cleanEffect",
+start:"top 80%",
+end:"bottom 20%",
+scrub:true
+},
+x:"100%"
+});
+
+});
+
+let time=7200;
 setInterval(()=>{
-let h = Math.floor(time/3600);
-let m = Math.floor((time%3600)/60);
-let s = time%60;
-document.getElementById("countdown").innerHTML = `${h}h ${m}m ${s}s`;
+let h=Math.floor(time/3600);
+let m=Math.floor((time%3600)/60);
+let s=time%60;
+document.getElementById("countdown").innerHTML=`${h}h ${m}m ${s}s`;
 time--;
 },1000);
 
